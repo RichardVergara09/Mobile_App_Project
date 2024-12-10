@@ -6,6 +6,9 @@ export default function App() {
     <View style={styles.container}>
       <Text style={styles.form}>Whack-a-mole!</Text>
       <button style={styles.form}>Play!</button>
+      <button style={styles.form}>Customize</button>
+      <button style={styles.form}>Settings</button>
+      <button style={styles.form}>Leaderboard</button>
       <StatusBar style="auto" />
     </View>
   );

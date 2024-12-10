@@ -1,20 +1,18 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const customize = () => {
+export default function customize() {
   return (
-    <View styles={styles.container}>
-      <Text>Customize</Text>
-      <button>Change Mole</button>
+    <View style={styles.container}>
+      <Text style={styles.form}>Customize</Text>
+      <button style={styles.form}>Change Mole</button>
       <Text>Theme</Text>
       <button>Gray</button>
       <button>Dark</button>
       <button>Light</button>
     </View>
   );
-};
-
-export default customize;
+}
 
 const styles = StyleSheet.create({
   container: {
