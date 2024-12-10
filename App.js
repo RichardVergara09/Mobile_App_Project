@@ -1,16 +1,26 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
 
-export default function App() {
+import { StyleSheet, Text, View, Button } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+import GamePage from "./app/screens/gamePage";
+import Customize from "./app/screens/customize";
+import Settings from "./app/screens/settings";
+import Home from "./app/screens/home";
+
+const App = () => {
+
+  const Stack = createStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.form}>Whack-a-mole!</Text>
-      <button style={styles.form}>Play!</button>
-      <button style={styles.form}>Customize</button>
-      <button style={styles.form}>Settings</button>
-      <button style={styles.form}>Leaderboard</button>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Play" component={GamePage} />
+      <Stack.Screen name="Customize" component={Customize} />
+      <Stack.Screen name="Settings" component={Settings} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -26,3 +36,5 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 });
+
+export default App;

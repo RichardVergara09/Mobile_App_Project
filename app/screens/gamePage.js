@@ -1,16 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-export default function settings() {
+const  GamePage = () => {
   return (
-    <View styles={styles.container}>
-      <Text>Settings</Text>
-      <Text>Difficulty: </Text>
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>Reset All</button>
-      <button>Report Issue</button>
+    <View style={styles.container}>
+      <Text style={styles.form}>Score: </Text>
+      <Text>All Time: </Text>
+      <Text>Best Streak: </Text>
     </View>
   );
 }
@@ -27,3 +23,5 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 });
+
+export default GamePage;
