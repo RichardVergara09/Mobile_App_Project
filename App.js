@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import GamePage from "./app/screens/gamePage";
+import Game from "./app/screens/game";
 import Customize from "./app/screens/customize";
 import Settings from "./app/screens/settings";
 import Home from "./app/screens/home";
@@ -16,7 +16,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Play" component={GamePage} />
+      <Stack.Screen name="Play" component={Game} />
       <Stack.Screen name="Customize" component={Customize} />
       <Stack.Screen name="Settings" component={Settings} />
       </Stack.Navigator>
