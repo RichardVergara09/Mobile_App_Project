@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground } from
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useState, useEffect } from "react";
 import { WhackAMoleImages } from "../assets/ImageAssets";
+import { useImageContext } from "../context/ImageContext";
 
 const GAME_TIME = 30;
 const GRID_SIZE = 3;
@@ -10,6 +11,8 @@ const HOLE_IMAGE = WhackAMoleImages.holeImage;
 const MOLE_IMAGE = WhackAMoleImages.moleImage;
 
 const Game = () => {
+  const { image } = useImageContext();
+  const [moleEntity, setMoleEntity] = useState(MOLE_IMAGE);
   const [time, setTime] = useState(GAME_TIME)
   const [molePosition, setMolePosition] = useState(null);
   const [score, setScore] = useState(0);
@@ -57,6 +60,13 @@ const Game = () => {
     setGameOver(false);
   }
 
+  useEffect(() => {
+    if (image) {
+      console.log('Image URI:', image);
+      setMoleEntity({ uri: image });
+    }
+  }, [image]);
+
   const renderGame = () => {
     return Array.from({ length: GRID_SIZE * GRID_SIZE }).map((_, index) => (
       <View key={index} style={styles.holeContainer}>
@@ -70,7 +80,11 @@ const Game = () => {
             resizeMode="cover"
           >
             {molePosition === index && !gameOver && (
-              <Image source={MOLE_IMAGE} style={styles.mole} />
+              <Image
+                source={moleEntity}
+                style={styles.mole}
+                resizeMode="contain"
+              />
             )}
           </ImageBackground>
         </TouchableOpacity>
@@ -142,8 +156,8 @@ const styles = StyleSheet.create({
   holeContainer: {
     marginBottom: 20,
     padding: 5,
-    width: '30%', 
-    aspectRatio: 1.5, 
+    width: '30%',
+    aspectRatio: 1.5,
     height: 100,
     justifyContent: 'center',
     alignItems: 'center',

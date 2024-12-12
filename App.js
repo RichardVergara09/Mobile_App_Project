@@ -1,5 +1,6 @@
 
 import { StyleSheet, Text, View, Button } from "react-native";
+import { ImageProvider, useImageContext } from "./app/context/ImageContext";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -13,14 +14,16 @@ const App = () => {
   const Stack = createStackNavigator();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Play" component={Game} />
-      <Stack.Screen name="Customize" component={Customize} />
-      <Stack.Screen name="Settings" component={Settings} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ImageProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Play" component={Game} />
+          <Stack.Screen name="Customize" component={Customize} />
+          <Stack.Screen name="Settings" component={Settings} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ImageProvider>
   );
 }
 
