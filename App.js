@@ -20,10 +20,10 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Scoreboard" component={ScoreBoard} />
           <Stack.Screen name="Play" component={Game} />
           <Stack.Screen name="Customize" component={Customize} />
           <Stack.Screen name="Settings" component={Settings} />
-          <Stack.Screen name="Scoreboard" component={ScoreBoard} />
         </Stack.Navigator>
       </NavigationContainer>
     </ImageProvider>

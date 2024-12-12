@@ -12,68 +12,68 @@ import firestore from '@react-native-firebase/firestore';
 
 
 const ScoreBoard = ({ navigation }) => {
-  const [players, setPlayers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+    const [players, setPlayers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
+useEffect(() => {
     const fetchPlayers = async () => {
         try {
-          const querySnapshot = await firestore().collection('Players').get();
-          const playerData = querySnapshot.docs.map(doc => ({
+        const querySnapshot = await firestore().collection('Players').get();
+        const playerData = querySnapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data()
-          }));
-          setPlayers(playerData);
-          setLoading(false);
+        }));
+        setPlayers(playerData);
+        setLoading(false);
         } catch (err) {
-          setError('Failed to fetch scoreboard data');
-          setLoading(false);
-          console.error('Error fetching data:', err);
+        setError('Failed to fetch scoreboard data');
+        setLoading(false);
+        console.error('Error fetching data:', err);
         }
-      };
+    };
 
     fetchPlayers();
-  }, []);
+}, []);
 
-  if (loading) {
+if (loading) {
     return (
-      <View style={styles.centerContainer}>
+    <View style={styles.centerContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
-      </View>
+    </View>
     );
-  }
+}
 
-  if (error) {
+if (error) {
     return (
-      <View style={styles.centerContainer}>
+    <View style={styles.centerContainer}>
         <Text style={styles.errorText}>{error}</Text>
-      </View>
+    </View>
     );
-  }
+}
 
-  return (
+return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Whack-a-mole Scoreboard</Text>
-      <ScrollView style={styles.scrollView}>
+    <Text style={styles.title}>Whack-a-mole Scoreboard</Text>
+    <ScrollView style={styles.scrollView}>
         {players.map((player) => (
-          <View key={player.id} style={styles.playerCard}>
+        <View key={player.id} style={styles.playerCard}>
             <View style={styles.playerInfo}>
-              <Text style={styles.playerName}>{player.Name}</Text>
-              <Text style={styles.playerCountry}>Country: {player.Country}</Text>
-              {player.Player_ID && (
+            <Text style={styles.playerName}>{player.Name}</Text>
+            <Text style={styles.playerCountry}>Country: {player.Country}</Text>
+            {player.Player_ID && (
                 <Text style={styles.playerId}>Player ID: {player.Player_ID}</Text>
-              )}
+            )}
             </View>
             <View style={styles.scoreContainer}>
-              <Text style={styles.scoreText}>Score:</Text>
-              <Text style={styles.scoreNumber}>{player.High_Score}</Text>
+            <Text style={styles.scoreText}>Score:</Text>
+            <Text style={styles.scoreNumber}>{player.High_Score}</Text>
             </View>
-          </View>
+        </View>
         ))}
-      </ScrollView>
+    </ScrollView>
     </SafeAreaView>
-  );
+);
 };
 
 const styles = StyleSheet.create({
