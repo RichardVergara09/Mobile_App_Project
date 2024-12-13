@@ -1,113 +1,122 @@
 import React, { useEffect, useState } from "react";
-import { 
-  StyleSheet, 
-  View, 
-  Text, 
-  ScrollView, 
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
   ActivityIndicator,
-  SafeAreaView
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
 
-const MOCK_API_URL = "https://675beabf9ce247eb1937db80.mockapi.io/players";
+const MOCK_API_URL = "https://675ca43cfe09df667f646a5b.mockapi.io/Players"; // NOTE: ENDPOINT IS NOT PUBLIC - MUST CHANGE URL TO OWN
 
 const ScoreBoard = ({ navigation }) => {
-    const [players, setPlayers] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const [players, setPlayers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-useEffect(() => {
+  useEffect(() => {
     const fetchPlayers = async () => {
-        try {
+      try {
         const response = await axios.get(MOCK_API_URL);
         console.log("Fetched data:", response.data);
         setPlayers(response.data);
         setLoading(false);
-        } catch (err) {
-        setError('Failed to fetch scoreboard data');
+      } catch (err) {
+        setError("Failed to fetch scoreboard data");
         setLoading(false);
-        console.error('Error fetching data:', err);
-        }
+        console.error("Error fetching data:", err);
+      }
     };
 
     fetchPlayers();
-}, []);
+  }, []);
 
-if (loading) {
+  if (loading) {
     return (
-    <View style={styles.centerContainer}>
+      <View style={styles.centerContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
-    </View>
+      </View>
     );
-}
+  }
 
-if (error) {
+  if (error) {
     return (
-    <View style={styles.centerContainer}>
+      <View style={styles.centerContainer}>
         <Text style={styles.errorText}>{error}</Text>
-    </View>
+      </View>
     );
-}
+  }
 
-return (
+  return (
     <SafeAreaView style={styles.container}>
-    <Text style={styles.title}>Whack-a-mole Scoreboard</Text>
-    <ScrollView style={styles.scrollView}>
-        {players.map((player) => (
-        <View key={player.id} style={styles.playerCard}>
-            <View style={styles.playerInfo}>
-            <Text style={styles.playerName}>{player.Name}</Text>
-            <Text style={styles.playerCountry}>Country: {player.Country}</Text>
-            {player.Player_ID && (
-                <Text style={styles.playerId}>Player ID: {player.Player_ID}</Text>
-            )}
+      <Text style={styles.title}>Whack-a-mole Scoreboard</Text>
+      <ScrollView style={styles.scrollView}>
+        {players
+          .sort((a, b) => b.Score - a.Score)
+          .map((player) => (
+            <View
+              key={player.playerID || player.Name}
+              style={styles.playerCard}
+            >
+              <View style={styles.playerInfo}>
+                <Text style={styles.playerName}>{player.Name}</Text>
+                <Text style={styles.playerCountry}>
+                  Country: {player.Country}
+                </Text>
+                {player.playerID && (
+                  <Text style={styles.playerId}>
+                    Player ID: {player.playerID}
+                  </Text>
+                )}
+              </View>
+              <View style={styles.scoreContainer}>
+                <Text style={styles.scoreText}>Score:</Text>
+                <Text style={styles.scoreNumber}>{player.Score}</Text>
+              </View>
             </View>
-            <View style={styles.scoreContainer}>
-            <Text style={styles.scoreText}>Score:</Text>
-            <Text style={styles.scoreNumber}>{player.High_Score}</Text>
-            </View>
-        </View>
-        ))}
-    </ScrollView>
+          ))}
+      </ScrollView>
     </SafeAreaView>
-);
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: "#f5f5f5",
   },
   centerContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-},
-title: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
-},
-scrollView: {
+    borderBottomColor: "#e0e0e0",
+  },
+  scrollView: {
     flex: 1,
     padding: 16,
-},
-playerCard: {
-    backgroundColor: '#fff',
+  },
+  playerCard: {
+    backgroundColor: "#fff",
     borderRadius: 8,
     padding: 16,
     marginBottom: 12,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    shadowColor: '#000',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: {
-    width: 0,
-    height: 2,
+      width: 0,
+      height: 2,
     },
     shadowOpacity: 0.1,
     shadowRadius: 4,
@@ -118,34 +127,34 @@ playerCard: {
   },
   playerName: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 4,
   },
   playerCountry: {
     fontSize: 14,
-    color: '#666',
+    color: "#666",
     marginBottom: 2,
   },
   playerId: {
     fontSize: 14,
-    color: '#666',
+    color: "#666",
   },
   scoreContainer: {
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
   },
   scoreText: {
     fontSize: 14,
-    color: '#666',
+    color: "#666",
   },
   scoreNumber: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#2196F3',
+    fontWeight: "bold",
+    color: "#2196F3",
   },
   errorText: {
-    color: 'red',
+    color: "red",
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
 
