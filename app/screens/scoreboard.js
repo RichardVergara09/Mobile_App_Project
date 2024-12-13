@@ -85,8 +85,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  title: {
+},
+title: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -94,12 +94,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0',
-  },
-  scrollView: {
+},
+scrollView: {
     flex: 1,
     padding: 16,
-  },
-  playerCard: {
+},
+playerCard: {
     backgroundColor: '#fff',
     borderRadius: 8,
     padding: 16,
@@ -109,8 +109,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
-      width: 0,
-      height: 2,
+    width: 0,
+    height: 2,
     },
     shadowOpacity: 0.1,
     shadowRadius: 4,
