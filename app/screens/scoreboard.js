@@ -1,5 +1,4 @@
-// app/screens/scoreboard.js
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { 
   StyleSheet, 
   View, 
@@ -7,9 +6,10 @@ import {
   ScrollView, 
   ActivityIndicator,
   SafeAreaView
-} from 'react-native';
-import firestore from '@react-native-firebase/firestore';
+} from "react-native";
+import axios from "axios";
 
+const MOCK_API_URL = "https://675beabf9ce247eb1937db80.mockapi.io/players";
 
 const ScoreBoard = ({ navigation }) => {
     const [players, setPlayers] = useState([]);
@@ -19,12 +19,9 @@ const ScoreBoard = ({ navigation }) => {
 useEffect(() => {
     const fetchPlayers = async () => {
         try {
-        const querySnapshot = await firestore().collection('Players').get();
-        const playerData = querySnapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-        }));
-        setPlayers(playerData);
+        const response = await axios.get(MOCK_API_URL);
+        console.log("Fetched data:", response.data);
+        setPlayers(response.data);
         setLoading(false);
         } catch (err) {
         setError('Failed to fetch scoreboard data');
