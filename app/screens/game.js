@@ -3,12 +3,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useState, useEffect } from "react";
 import { WhackAMoleImages } from "../assets/ImageAssets";
 import { useImageContext } from "../context/ImageContext";
+import axios from "axios";
 
 const GAME_TIME = 30;
 const GRID_SIZE = 3;
 const MOLE_APPEAR_INTERVAL = 1000; // change to alter speed
 const HOLE_IMAGE = WhackAMoleImages.holeImage;
 const MOLE_IMAGE = WhackAMoleImages.moleImage;
+const MOCK_API_URL = "https://675ca43cfe09df667f646a5b.mockapi.io/Players";
 
 const Game = () => {
   const { image } = useImageContext();

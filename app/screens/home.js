@@ -22,13 +22,6 @@ const Home = ({ navigation }) => {
                         <Text style={styles.buttonText}>Customize</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={[styles.button, { backgroundColor: "black" }]}
-                        onPress={() => navigation.navigate("Settings")}
-                        activeOpacity={0.7}
-                    >
-                        <Text style={styles.buttonText}>Settings</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
                         style={[styles.button, { backgroundColor: "blue" }]}
                         onPress={() => navigation.navigate("Scoreboard")}
                         activeOpacity={0.7}

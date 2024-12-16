@@ -6,7 +6,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Game from "./app/screens/game";
 import Customize from "./app/screens/customize";
-import Settings from "./app/screens/settings";
 import Home from "./app/screens/home";
 import ScoreBoard from './app/screens/scoreboard';
 
@@ -23,7 +22,6 @@ const App = () => {
           <Stack.Screen name="Scoreboard" component={ScoreBoard} />
           <Stack.Screen name="Play" component={Game} />
           <Stack.Screen name="Customize" component={Customize} />
-          <Stack.Screen name="Settings" component={Settings} />
         </Stack.Navigator>
       </NavigationContainer>
     </ImageProvider>
